@@ -177,7 +177,7 @@ ejecutarPrueba ()
 				echo "$i"
 				sleep 1
 			done
-			prueba1
+			#prueba1
 			;;
 		2)
 			echo "P2"
@@ -188,10 +188,33 @@ ejecutarPrueba ()
 			echo "Creo que tenemos un intruso, un HACKER"
 			echo "Al parecer el sujeto esta intentando verificar nuestra conectividad a la red mediante el comando ping"
 			pid=$(ps -ef | grep Hacker | grep -v grep | awk '{print $2}')
-			echo "Segun lo que pude ver este es el PID del proceso: "
+			echo "Segun lo que pude ver este es el PID del proceso: $pid"
 			echo "Necesito que me indiques el comando para poder matar el proceso que esta llevando a cabo el hacker"
+
+			#Meter en un while
+			flag=true
+			while [ $flag -eq 1 ]
+			do
+				read comando
+				if [[ $comando =~ "^kill $pid$" ]]; then
+					kill $pid
+					sigueVivo=$(ps -ef | grep Hacker | grep -v grep) 
+					if [[ -z $sigueVivo ]]; then 
+						echo "Al parecer lograste eliminar el intento del hacker de verificar nuestra conectividad."
+						echo "Pero ahora es necesario elimiar al usuario por completo."
+						echo "Tomate un descanso, ya hiciste mucho, dejame eliminar al usuario Hacker."
+						deluser Hacker
+						echo "Eliminando..."
+						sleep 1
+						flag=false
+					else
+						echo "El proceso no fue eliminado, intentalo nuevamente."
+					fi
+				else
+					echo "No se si no tenes claro como matar el proeso o solo fue un error de typeo, intenta de nuevo."
+				fi
+			done
 			
-			read comando
 
 			;;
 		4)

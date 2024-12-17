@@ -2,7 +2,7 @@
 
 prueba1 ()
 {
-
+    
 }
 
 prueba2 ()
@@ -13,7 +13,7 @@ prueba2 ()
 prueba3 ()
 {
     useradd Hacker
-    su Hacker -c top &
+    su Hacker -c "ping 8.8.8.8 &"
 }
 
 prueba4 ()
