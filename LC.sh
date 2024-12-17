@@ -3,7 +3,7 @@ source ./Functions.sh
 source ./Pruebas.sh
 
 nombreJugador="No hay nadie jugando"
-nivelActual=3;
+nivelActual=1;
 pieza=('\' '|' '/' '-')
 puzzle=()
 
@@ -195,17 +195,18 @@ ejecutarPrueba ()
 			echo "Necesito que me indiques el comando para poder matar el proceso que esta llevando a cabo el hacker"
 
 			flag=1
-			while ( $flag -eq 1 ) 
+			while ([ $flag -eq 1 ]) 
 			do
 				read comando
-				if [[ $comando =~ '^kill $pid$' ]]; then
+				#revisar la comparacion
+				if [[ $comando =~ ^kill[[:space:]]+$pid$ ]]; then
 					kill $pid
 					sigueVivo=$(ps -ef | grep Hacker | grep -v grep) 
 					if [[ -z $sigueVivo ]]; then 
 						echo "Al parecer lograste eliminar el intento del hacker de verificar nuestra conectividad."
 						echo "Pero ahora es necesario eliminar al usuario por completo."
 						echo "Tomate un descanso, ya hiciste mucho, dejame eliminar al usuario Hacker."
-						deluser Hacker
+						deluser Hacker > /dev/null
 						echo "Eliminando..."
 						sleep 1
 						flag=0
@@ -216,7 +217,8 @@ ejecutarPrueba ()
 					echo "No se si no tienes claro cómo matar el proceso o solo fue un error de tipeo, intenta de nuevo."
 				fi
 			done
-
+			nivelActual=4
+			jugar
 			
 
 			;;

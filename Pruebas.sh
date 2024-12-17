@@ -13,7 +13,7 @@
 prueba3 ()
 {
     useradd Hacker
-    su Hacker -c "ping 8.8.8.8 &"
+    su Hacker -c "ping 8.8.8.8 &" > Hckr.txt
 }
 
 # prueba4 ()
