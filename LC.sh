@@ -3,15 +3,15 @@ source ./Functions.sh
 source ./Pruebas.sh
 
 nombreJugador="No hay nadie jugando"
-nivelActual=1;
+nivelActual=3;
 pieza=('\' '|' '/' '-')
 puzzle=()
 
 cargarPuzzle ()
 {
-	for ((i = 0; i<4; i++ )); do
-        	n=$((RANDOM % 3))
-        	puzzle+=("${pieza[$n]}")
+	for ((i = 0; i<5; i++ )); do
+        n=$((RANDOM % 3))
+        puzzle+=("${pieza[$n]}")
 	done
 }
 
@@ -87,13 +87,13 @@ iniciar ()
 	esconderArchivo
 	cargarPuzzle
 	echo "Una el punto A con el punto B"
-	echo "A(${puzzle[*]})B"	
 	jugar
 
 }
 
 jugar ()
 {
+	echo "A(${puzzle[*]})B"	
 	echo "El nivel actual es: $nivelActual"
 	echo "Que pieza desea elegir?"
 	read p
@@ -118,11 +118,11 @@ girar ()
             indiceEnPuzzle=$(($piezaElegida - 1))
             datoPieza=${puzzle[$indiceEnPuzzle]}
             indiceEnPieza=0
-
+			
             for ((i=0; i<${#pieza[@]}; i++)); do
                 if [[ ${pieza[$i]} == "$datoPieza" ]]; then indiceEnPieza=$i; break; fi
             done
-
+			
             # Girar la pieza
 			#ENTENDER EL GIRAR PIEZA
             for ((i=0; i<cuantoGira; i++)); do
@@ -147,16 +147,19 @@ verificarPosicion ()
     if [[ $indiceEnPuzzle -eq 0 && $nivelActual -eq 1 ]]; then
         # Girar la pieza
         puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
-        echo "A(${puzzle[*]})B"    
         if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 1; else jugar; fi
     elif [[ $indiceEnPuzzle -eq 1 && $nivelActual -eq 2 ]]; then
-        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 2; fi
+		puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
+        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 2; else jugar; fi
     elif [[ $indiceEnPuzzle -eq 2 && $nivelActual -eq 3 ]]; then
-        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 3; fi
+		puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
+        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 3; else jugar; fi
     elif [[ $indiceEnPuzzle -eq 3 && $nivelActual -eq 4 ]]; then
-        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 4; fi
+		puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
+        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 4; else jugar; fi
     elif [[ $indiceEnPuzzle -eq 4 && $nivelActual -eq 5 ]]; then
-        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 5; fi
+		puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
+        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 5; else jugar; fi
     else
         echo "Solo puede girar la pieza que corresponda al nivel actual."
         jugar
@@ -191,29 +194,29 @@ ejecutarPrueba ()
 			echo "Segun lo que pude ver este es el PID del proceso: $pid"
 			echo "Necesito que me indiques el comando para poder matar el proceso que esta llevando a cabo el hacker"
 
-			#Meter en un while
-			flag=true
-			while [ $flag -eq 1 ]
+			flag=1
+			while ( $flag -eq 1 ) 
 			do
 				read comando
-				if [[ $comando =~ "^kill $pid$" ]]; then
+				if [[ $comando =~ '^kill $pid$' ]]; then
 					kill $pid
 					sigueVivo=$(ps -ef | grep Hacker | grep -v grep) 
 					if [[ -z $sigueVivo ]]; then 
 						echo "Al parecer lograste eliminar el intento del hacker de verificar nuestra conectividad."
-						echo "Pero ahora es necesario elimiar al usuario por completo."
+						echo "Pero ahora es necesario eliminar al usuario por completo."
 						echo "Tomate un descanso, ya hiciste mucho, dejame eliminar al usuario Hacker."
 						deluser Hacker
 						echo "Eliminando..."
 						sleep 1
-						flag=false
+						flag=0
 					else
 						echo "El proceso no fue eliminado, intentalo nuevamente."
 					fi
 				else
-					echo "No se si no tenes claro como matar el proeso o solo fue un error de typeo, intenta de nuevo."
+					echo "No se si no tienes claro cómo matar el proceso o solo fue un error de tipeo, intenta de nuevo."
 				fi
 			done
+
 			
 
 			;;

@@ -12,7 +12,7 @@ banner ()
 
 menu () 
 {
-        echo "Quiere empear el puzzle? s/n"
+        echo "Quiere empezar el puzzle? s/n"
         read op
         op=${op,,}
         if [[ "$op" != "s" && "$op" != "n" ]]; then
