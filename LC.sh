@@ -3,23 +3,16 @@ source ./Functions.sh
 source ./Pruebas.sh
 
 nombreJugador="No hay nadie jugando"
-nivelActual=1;
+nivelActual=4;
 pieza=('\' '|' '/' '-')
 puzzle=()
 
 cargarPuzzle ()
 {
-	for ((i = 0; i<5; i++ )); do
+	for ((i = 0; i<4; i++ )); do
         n=$((RANDOM % 3))
         puzzle+=("${pieza[$n]}")
 	done
-}
-
-esconderArchivo()
-{
-	mkdir ".rutaOculta"
-	cd ".rutaOculta"
-	echo -e '#!/bin/bash\n\necho "Lo encontraste!"' > .elOculto.sh
 }
 
 pruebaDelDigno ()
@@ -84,7 +77,6 @@ pruebaDelDigno ()
 iniciar ()
 {
 	echo ""
-	esconderArchivo
 	cargarPuzzle
 	echo "Una el punto A con el punto B"
 	jugar
@@ -112,7 +104,7 @@ girar ()
         echo "No puede dejar ningun campo vacio."
         jugar
     else
-        if [[ $piezaElegida =~ ^[1-5]$ && $cuantoGira =~ ^[1-4]$ ]]; then
+        if [[ $piezaElegida =~ ^[1-4]$ && $cuantoGira =~ ^[1-4]$ ]]; then
             indiceEnPuzzle=$(($piezaElegida - 1))
             datoPieza=${puzzle[$indiceEnPuzzle]}
             indiceEnPieza=0
@@ -154,9 +146,6 @@ verificarPosicion ()
     elif [[ $indiceEnPuzzle -eq 3 && $nivelActual -eq 4 ]]; then
 		puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
         if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 4; else jugar; fi
-    elif [[ $indiceEnPuzzle -eq 4 && $nivelActual -eq 5 ]]; then
-		puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
-        if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 5; else jugar; fi
     else
         echo "Solo puede girar la pieza que corresponda al nivel actual."
         jugar
@@ -189,6 +178,10 @@ ejecutarPrueba ()
 			elif [[ $hora -ge 12 && $hora -le 18 ]]; then
 				echo "Tarde"
 				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=tqQGWhge5yo" > /dev/null
+				archMp3=$(ls |  grep -E mp3$)
+				echo $archMp3
+				rs=$(mpg321 -q "$archMp3" &)
+				echo $rs
 			else
 				echo "Noche"
 				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=einn_UJgGGM" > /dev/null
@@ -232,10 +225,19 @@ ejecutarPrueba ()
 			jugar
 			;;
 		4)
-			echo "P4"
-			;;
-		5)
-			echo "P5"
+			echo "Ya estas en la prueba final, The Final Boss, El jefe supremo, La ultima recta, El escalon mas alto."
+			echo "Bueno creo que se entendio..."
+			dirAct=$(pwd)
+			echo "En esta prueba tendras que darme inforacion sobre un archivo oculto que dejo el hacker en el directorio actual: "$dirAct""
+			echo "Una vez que lo encuentres necesito saber cuantas lineas tiene el archivo."
+			echo "Finalmente deberas indicarme el tipo de archivo que es."
+			echo "Te recomiendo abrir una nueva terminal para que hagas lo que necesites hacer."
+			echo "Cuando vuelvas me tenes que responder la cantidad de lineas que tiene y el tipo de archivo."
+			echo "Cantidad de lineas:"
+			read cl
+			echo "Tipo de archivo:"
+			read ta
+
 			;;
 		*)
 			echo "Prueba inexistente."
