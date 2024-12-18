@@ -173,17 +173,34 @@ ejecutarPrueba ()
 		1)
 			echo "Al parcer logro posicionar la primer pieza de forma correcta."
 			echo "Pero..."
-			echo "Nada es tan facil, veremos que tan rapido eres en abrir 3 programas en menos de 10 segundos."
+			echo "Nada es tan facil, veremos que tan rapido sos en abrir 3 programas en menos de 10 segundos."
 			echo "Estos son..."
-			echo "vim, calculadora y el editor de texto."
+			echo "Slack, Editor de texto y VSCode"
+			sleep 1
+			echo "Corre el tiempo"
 			for ((i = 1; i<11; i++ )); do
 				echo "$i"
 				sleep 1
 			done
-			#prueba1
+			prueba1
 			;;
 		2)
-			echo "P2"
+			echo "Bueno bueno, puedo ver que alguien logro resolver la segunda parte...."
+			echo "Dejame ver bien en que momento del dia nos encontramos ya que la siguiente prueba depende de esto."
+			hora=$(date | awk '{print $4}' | cut -d: -f1)
+			echo $hora
+			if [[ $hora -lt 12 ]]; then
+				echo "Mañana"
+				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=BN1WwnEDWAM" > /dev/null
+				
+			elif [[ $hora -ge 12 && $hora -le 18 ]]; then
+				echo "Tarde"
+				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=tqQGWhge5yo" > /dev/null
+			else
+				echo "Noche"
+				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=einn_UJgGGM" > /dev/null
+				
+			fi
 			;;
 		3)
 			prueba3
@@ -192,7 +209,7 @@ ejecutarPrueba ()
 			echo "Al parecer el sujeto esta intentando verificar nuestra conectividad a la red mediante el comando ping"
 			pid=$(ps -ef | grep Hacker | grep -v grep | awk '{print $2}')
 			echo "Segun lo que pude ver este es el PID del proceso: $pid"
-			echo "Necesito que me indiques el comando para poder matar el proceso que esta llevando a cabo el hacker"
+			echo "Necesito que me indiques el comando para poder matar el proceso que esta llevando a cabo el hacker."
 
 			flag=1
 			while ([ $flag -eq 1 ]) 
@@ -219,8 +236,6 @@ ejecutarPrueba ()
 			done
 			nivelActual=4
 			jugar
-			
-
 			;;
 		4)
 			echo "P4"
