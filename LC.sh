@@ -3,7 +3,7 @@ source ./Functions.sh
 source ./Pruebas.sh
 
 nombreJugador="No hay nadie jugando"
-nivelActual=4;
+nivelActual=2;
 pieza=('\' '|' '/' '-')
 puzzle=()
 
@@ -173,18 +173,13 @@ ejecutarPrueba ()
 			echo $hora
 			if [[ $hora -lt 12 ]]; then
 				echo "Mañana"
-				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=BN1WwnEDWAM" > /dev/null
+				
 				
 			elif [[ $hora -ge 12 && $hora -le 18 ]]; then
 				echo "Tarde"
-				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=tqQGWhge5yo" > /dev/null
-				archMp3=$(ls |  grep -E mp3$)
-				echo $archMp3
-				rs=$(mpg321 -q "$archMp3" &)
-				echo $rs
+				
 			else
 				echo "Noche"
-				yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=einn_UJgGGM" > /dev/null
 				
 			fi
 			;;
@@ -229,14 +224,16 @@ ejecutarPrueba ()
 			echo "Bueno creo que se entendio..."
 			dirAct=$(pwd)
 			echo "En esta prueba tendras que darme inforacion sobre un archivo oculto que dejo el hacker en el directorio actual: "$dirAct""
+			echo "Aparte de saber en que directorio esta el archivo sabemos que emipeza con H y termina con r."
+			echo "Pero tene en cuenta que despues del nombre viene la extension la cual tiene 4 caracteres contando el punto."
 			echo "Una vez que lo encuentres necesito saber cuantas lineas tiene el archivo."
 			echo "Finalmente deberas indicarme el tipo de archivo que es."
 			echo "Te recomiendo abrir una nueva terminal para que hagas lo que necesites hacer."
 			echo "Cuando vuelvas me tenes que responder la cantidad de lineas que tiene y el tipo de archivo."
-			echo "Cantidad de lineas:"
-			read cl
-			echo "Tipo de archivo:"
-			read ta
+			
+			prueba4 
+			echo "Terminaste."
+			echo "Fin deljuego."
 
 			;;
 		*)

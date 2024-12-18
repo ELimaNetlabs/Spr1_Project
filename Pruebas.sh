@@ -37,7 +37,28 @@ prueba3 ()
     su Hacker -c "ping 8.8.8.8 &" > .Hckr.txt
 }
 
-# prueba4 ()
-# {
+prueba4 ()
+{
+    yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=ADGFuE7T8Qc&ab_channel=agustin4100" &> /dev/null
+    archivo=$(ls -a | grep -E '^\.H.*r\..{3}$')
+    cantLineas=$(cat $archivo | wc -l)
+    tipoArchivo=$(file $archivo)
+    flag=0
     
-# }
+	while ([ $flag -eq 0 ])
+	do
+		echo "Cantidad de lineas:"
+		read cl
+		echo "Tipo de archivo:"
+		read ta
+
+        if [[ $cl -eq $cantLineas && $ta == $tipoArchivo ]]; then 
+            flag=1 
+            
+            
+        else echo "Intetalo de nuevo, estas cerca."; fi
+        
+	done
+
+
+}
