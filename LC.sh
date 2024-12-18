@@ -113,8 +113,6 @@ girar ()
         jugar
     else
         if [[ $piezaElegida =~ ^[1-5]$ && $cuantoGira =~ ^[1-4]$ ]]; then
-            echo "La pieza elegida existe"
-            
             indiceEnPuzzle=$(($piezaElegida - 1))
             datoPieza=${puzzle[$indiceEnPuzzle]}
             indiceEnPieza=0
@@ -145,7 +143,6 @@ verificarPosicion ()
     indiceEnPuzzle=$2
     
     if [[ $indiceEnPuzzle -eq 0 && $nivelActual -eq 1 ]]; then
-        # Girar la pieza
         puzzle[$indiceEnPuzzle]=${pieza[$indiceEnPieza]}
         if [[ $indiceEnPieza -eq 3 ]]; then ejecutarPrueba 1; else jugar; fi
     elif [[ $indiceEnPuzzle -eq 1 && $nivelActual -eq 2 ]]; then
@@ -173,16 +170,12 @@ ejecutarPrueba ()
 		1)
 			echo "Al parcer logro posicionar la primer pieza de forma correcta."
 			echo "Pero..."
-			echo "Nada es tan facil, veremos que tan rapido sos en abrir 3 programas en menos de 10 segundos."
-			echo "Estos son..."
-			echo "Slack, Editor de texto y VSCode"
-			sleep 1
-			echo "Corre el tiempo"
-			for ((i = 1; i<11; i++ )); do
-				echo "$i"
-				sleep 1
-			done
-			prueba1
+			echo "Nada es tan facil, veremos que tan rapido sos en abrir 3 programas en menos de 10 segundos." 
+			prueba1 "Estos son..."
+			echo "Woooow mas despacio velocista, te sobro tiempo y todo."
+			echo "Sigamos con el puzzle."
+			nivelActual=2
+			jugar
 			;;
 		2)
 			echo "Bueno bueno, puedo ver que alguien logro resolver la segunda parte...."
@@ -212,6 +205,7 @@ ejecutarPrueba ()
 			echo "Necesito que me indiques el comando para poder matar el proceso que esta llevando a cabo el hacker."
 
 			flag=1
+			
 			while ([ $flag -eq 1 ]) 
 			do
 				read comando
