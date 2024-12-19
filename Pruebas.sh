@@ -106,7 +106,6 @@ prueba3 ()
 
 prueba4 ()
 {
-    yt-dlp -x --audio-format mp3 -o "%(title)s.%(ext)s" "https://www.youtube.com/watch?v=ADGFuE7T8Qc&ab_channel=agustin4100" &> /dev/null
     archivo=$(ls -a | grep -E '^\.H.*r\..{3}$')
     cantLineas=$(cat $archivo | wc -l)
     tipoArchivo=$(file $archivo)

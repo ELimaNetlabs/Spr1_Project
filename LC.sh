@@ -3,7 +3,7 @@ source ./Functions.sh
 source ./Pruebas.sh
 
 nombreJugador="No hay nadie jugando"
-nivelActual=1;
+nivelActual=4;
 pieza=('\' '|' '/' '-')
 puzzle=()
 
@@ -78,13 +78,15 @@ iniciar ()
 {
 	echo ""
 	cargarPuzzle
-	echo "Una el punto A con el punto B"
 	jugar
 
 }
 
 jugar ()
 {
+	clear
+	banner
+	echo "Una el punto A con el punto B"
 	echo "A(${puzzle[*]})B"	
 	echo "El nivel actual es: $nivelActual"
 	echo "Que pieza desea elegir?"
@@ -231,9 +233,15 @@ ejecutarPrueba ()
 			
 			prueba4 
 			echo "Terminaste."
+			sleep 0.5
 			echo "Fin deljuego."
+			sleep 0.5
+			echo "Se termino"
+			sleep 0.5
+			echo "Llegaste al final."
+			sleep 0.5
+			echo "ok, GRACIAS POR JUGAR."
 			rm .Hckr.txt
-			rm "Rocky Balboa - Música de entrenamiento.mp3"
 			;;
 		*)
 			echo "Prueba inexistente."
