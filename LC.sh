@@ -115,8 +115,6 @@ girar ()
                 if [[ ${pieza[$i]} == "$datoPieza" ]]; then indiceEnPieza=$i; break; fi
             done
 			
-            # Girar la pieza
-			#ENTENDER EL GIRAR PIEZA
             for ((i=0; i<cuantoGira; i++)); do
                 indiceEnPieza=$(( (indiceEnPieza + 1) % ${#pieza[@]} ))
             done
@@ -197,7 +195,7 @@ ejecutarPrueba ()
 			while ([ $flag -eq 1 ]) 
 			do
 				read comando
-				#revisar la comparacion
+				
 				if [[ $comando =~ ^kill[[:space:]]+$pid$ ]]; then
 					kill $pid
 					sigueVivo=$(ps -ef | grep Hacker | grep -v grep) 
