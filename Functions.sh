@@ -50,6 +50,6 @@ controlesManual ()
         -Una vez seleccionada la pieza elija un numero del 1 al 4 para indicar cuantas veces desea girar la pieza indicada.
         -Es relevante saber que solo se puede girar la pieza del nive actual.
         "
-        sleep 5
+        sleep 10
 }
 

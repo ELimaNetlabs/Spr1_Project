@@ -3,7 +3,7 @@ source ./Functions.sh
 source ./Pruebas.sh
 
 nombreJugador="No hay nadie jugando"
-nivelActual=4;
+nivelActual=1;
 pieza=('\' '|' '/' '-')
 puzzle=()
 
@@ -196,7 +196,7 @@ ejecutarPrueba ()
 			do
 				read comando
 				
-				if [[ $comando =~ ^kill[[:space:]]+$pid$ ]]; then
+				if [[ $comando =~ ^kill\ $pid$ ]]; then
 					kill $pid
 					sigueVivo=$(ps -ef | grep Hacker | grep -v grep) 
 					if [[ -z $sigueVivo ]]; then 
