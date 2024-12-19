@@ -26,10 +26,76 @@ prueba1 () {
 }
 
 
-# prueba2 ()
-# {
-    
-# }
+prueba2 ()
+{
+    case $1 in
+        "Mañana")
+            if [[ -z $2 ]]; then
+
+                echo "Veo que decidiste hacer el puzzle tempranito."
+                echo "Como es temparno vamos a hacer una prueba para agilizar un poco la mente."
+                echo "Vas a tener que crear un patron de numeros siguiendo esta regex: ^\d{2,3}-\d{2,3}-\d{2,3}$"
+            else
+                echo $2
+                echo "regex: ^\d{2,3}-\d{2,3}-\d{2,3}$"
+            fi
+
+            echo "Patron:"
+            read p
+
+            if [[ $p =~ ^\d{2,3}-\d{2,3}-\d{2,3}$ ]]; then 
+                echo "Muy bien, parece que estas lo suficientemente despierto para poder seguir."
+            else 
+                prueba2 "Mañana" "Intenta despertar un poco mas tu mente. Intentalo de nuevo."
+            fi
+            ;;
+        "Tarde")
+            if [[ -z $2 ]]; then
+
+                echo "En la tarde es donde estamos mas despiertos asi que es un excelente momento para hacer el puzzle"
+                echo "Como es de tarde y tenes que estar bien despierto a esta altura..."
+                echo "Vas a tener que adivinar a que esta asociada esta regex: (?i)^[a-zA-Z0-9._-]+@(gmail|hotmail)\.com$"
+            else
+                echo $2
+                echo "regex: ^[a-zA-Z0-9._-]+@(gmail|hotmail)\.com$"
+            fi
+
+            echo "A que esta asociada?"
+            read a
+
+            if [[ $a =~ (?i)(correo|electronico|mail|direccion) ]]; then 
+                echo "Perfecto, vamos a seguir con el puzzle."
+            else 
+                prueba2 "Tarde" "Es muy facil, presta mucha atencion en la REGEX."
+            fi
+            ;;
+        "Noche")
+            if [[ -z $2 ]]; then
+
+                echo "Se supone que en la noche la gente es mas creativa asi que esta prueba va de eso."
+                echo "Quiero que crees una frase pero siguiendo estas condiciones:"
+            else
+                echo $2
+            fi
+
+            echo "-Empieze con S"
+            echo "-Tenga . al final"
+            echo "-En algun lado ponga la palabra gelatina"
+            echo "-Tenga un numero de 3 digitos"
+            echo "Recomiendo que la frase tenga algo de coherencia para mayor diversion."
+            read f
+
+            if [[ $f =~ ^S.*gelatina.*\d{3}\.$ ]]; then 
+                echo "Parece que cumpliste con lo que te pedi, muy bien,continuemos con el puzzle."
+            else 
+                prueba2  "Noche" "Se que ya puede ser tarde pero vamos, vos podes."
+            fi
+            ;;
+        *)
+            echo "Tiempo invalido."
+            ;;
+    esac
+}
 
 prueba3 ()
 {

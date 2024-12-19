@@ -173,15 +173,17 @@ ejecutarPrueba ()
 			echo $hora
 			if [[ $hora -lt 12 ]]; then
 				echo "Mañana"
-				
-				
+				prueba2 "Mañana"
 			elif [[ $hora -ge 12 && $hora -le 18 ]]; then
 				echo "Tarde"
-				
+				prueba2 "Tarde"
 			else
 				echo "Noche"
-				
+				prueba2 "Noche"
 			fi
+
+			nivelActual=3
+			jugar
 			;;
 		3)
 			prueba3
