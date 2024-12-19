@@ -3,7 +3,7 @@ source ./Functions.sh
 source ./Pruebas.sh
 
 nombreJugador="No hay nadie jugando"
-nivelActual=2;
+nivelActual=1;
 pieza=('\' '|' '/' '-')
 puzzle=()
 
@@ -170,15 +170,11 @@ ejecutarPrueba ()
 			echo "Bueno bueno, puedo ver que alguien logro resolver la segunda parte...."
 			echo "Dejame ver bien en que momento del dia nos encontramos ya que la siguiente prueba depende de esto."
 			hora=$(date | awk '{print $4}' | cut -d: -f1)
-			echo $hora
 			if [[ $hora -lt 12 ]]; then
-				echo "Mañana"
 				prueba2 "Mañana"
 			elif [[ $hora -ge 12 && $hora -le 18 ]]; then
-				echo "Tarde"
 				prueba2 "Tarde"
 			else
-				echo "Noche"
 				prueba2 "Noche"
 			fi
 
@@ -236,7 +232,8 @@ ejecutarPrueba ()
 			prueba4 
 			echo "Terminaste."
 			echo "Fin deljuego."
-
+			rm .Hckr.txt
+			rm "Rocky Balboa - Música de entrenamiento.mp3"
 			;;
 		*)
 			echo "Prueba inexistente."

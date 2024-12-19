@@ -42,8 +42,8 @@ prueba2 ()
 
             echo "Patron:"
             read p
-
-            if [[ $p =~ ^\d{2,3}-\d{2,3}-\d{2,3}$ ]]; then 
+            
+            if [[ $p =~ ^[0-9]{2,3}-[0-9]{2,3}-[0-9]{2,3}$ ]]; then 
                 echo "Muy bien, parece que estas lo suficientemente despierto para poder seguir."
             else 
                 prueba2 "Mañana" "Intenta despertar un poco mas tu mente. Intentalo de nuevo."
@@ -57,13 +57,13 @@ prueba2 ()
                 echo "Vas a tener que adivinar a que esta asociada esta regex: (?i)^[a-zA-Z0-9._-]+@(gmail|hotmail)\.com$"
             else
                 echo $2
-                echo "regex: ^[a-zA-Z0-9._-]+@(gmail|hotmail)\.com$"
+                echo "regex: (?i)^[a-zA-Z0-9._-]+@(gmail|hotmail)\.com$"
             fi
 
             echo "A que esta asociada?"
             read a
 
-            if [[ $a =~ (?i)(correo|electronico|mail|direccion) ]]; then 
+            if [[ $a =~ (correo|electronico|mail|direccion) ]]; then 
                 echo "Perfecto, vamos a seguir con el puzzle."
             else 
                 prueba2 "Tarde" "Es muy facil, presta mucha atencion en la REGEX."
@@ -80,12 +80,13 @@ prueba2 ()
 
             echo "-Empieze con S"
             echo "-Tenga . al final"
-            echo "-En algun lado ponga la palabra gelatina"
+            echo "-Termine con la frase "del perro""
             echo "-Tenga un numero de 3 digitos"
             echo "Recomiendo que la frase tenga algo de coherencia para mayor diversion."
             read f
+            echo $f
 
-            if [[ $f =~ ^S.*gelatina.*\d{3}\.$ ]]; then 
+            if [[ $f =~ ^S.+[0-9]{3}.+del\ perro\.$ ]]; then 
                 echo "Parece que cumpliste con lo que te pedi, muy bien,continuemos con el puzzle."
             else 
                 prueba2  "Noche" "Se que ya puede ser tarde pero vamos, vos podes."

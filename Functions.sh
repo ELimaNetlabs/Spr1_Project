@@ -29,6 +29,7 @@ menu ()
                         read nombre
                         sleep 0.5
 			pruebaDelDigno $nombre
+
                 else
                         echo "Hasta luego..."
                         sleep 1
@@ -45,9 +46,9 @@ controlesManual ()
         echo "
         CONTROLES
         Hola $1, estos son los controles para interactuar con el puzzle:
-        -Para seleccionar la pieza a mover lo puede hacer con los numeros del 1 al 5.
+        -Para seleccionar la pieza a mover lo puede hacer con los numeros del 1 al 4.
         -Una vez seleccionada la pieza elija un numero del 1 al 4 para indicar cuantas veces desea girar la pieza indicada.
-        -Es relevante saber que solo se puede girarla pieza del nive actual.
+        -Es relevante saber que solo se puede girar la pieza del nive actual.
         "
         sleep 5
 }
